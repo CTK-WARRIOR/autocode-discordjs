@@ -1,1 +1,3 @@
-# autocode.js
+# @autocode/discordjs
+
+- Guide and Docs coming soon...

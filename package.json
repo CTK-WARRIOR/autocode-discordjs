@@ -1,0 +1,16 @@
+{
+  "name": "autocode-discordjs",
+  "version": "1.0.0",
+  "description": "Allows you to use discord.js syntax in autocode.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "autocode",
+    "discordjs",
+    "autocode"
+  ],
+  "author": "ctk",
+  "license": "ISC"
+}

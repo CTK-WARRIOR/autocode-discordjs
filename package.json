@@ -1,6 +1,6 @@
 {
   "name": "autocode-discordjs",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Allows you to use discord.js syntax in autocode.",
   "main": "index.js",
   "scripts": {
@@ -20,5 +20,8 @@
   },
   "homepage": "https://github.com/CTK-WARRIOR/autocode-discordjs#readme",
   "author": "ctk",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "lib": "^4.3.3"
+  }
 }

@@ -29,5 +29,23 @@ module.exports = {
      GREYPLE: 0x99aab5,
      DARK_BUT_NOT_BLACK: 0x2c2f33,
      NOT_QUITE_BLACK: 0x23272a,
-   }
+   },
+
+   FLAGS: {
+      DISCORD_EMPLOYEE: 1 << 0,
+      PARTNERED_SERVER_OWNER: 1 << 1,
+      DISCORD_PARTNER: 1 << 1,
+      HYPESQUAD_EVENTS: 1 << 2,
+      BUGHUNTER_LEVEL_1: 1 << 3,
+      HOUSE_BRAVERY: 1 << 6,
+      HOUSE_BRILLIANCE: 1 << 7,
+      HOUSE_BALANCE: 1 << 8,
+      EARLY_SUPPORTER: 1 << 9,
+      TEAM_USER: 1 << 10,
+      SYSTEM: 1 << 12,
+      BUGHUNTER_LEVEL_2: 1 << 14,
+      VERIFIED_BOT: 1 << 16,
+      EARLY_VERIFIED_DEVELOPER: 1 << 17,
+      VERIFIED_DEVELOPER: 1 << 17,
+  }
 }

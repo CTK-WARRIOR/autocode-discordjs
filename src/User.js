@@ -95,65 +95,64 @@ class User {
              */
             this.flags = new Tools.getUserBadges(data.public_flags);
         }
-
-        /**
+    }
+    /**
          * Whether this User is a partial
          * @type {boolean}
          * @readonly
          */
-        get partial() {
-            return typeof this.username !== 'string';
+     get partial() {
+        return typeof this.username !== 'string';
+    }
+
+    /**
+     * The timestamp the user was created at
+     * @type {number}
+     * @readonly
+     */
+    get createdTimestamp() {
+        const DISCORD_EPOCH = 1420070400000;
+
+        function convertSnowflakeToDate(snowflake) {
+            return new Date(snowflake / 4194304 + DISCORD_EPOCH);
         }
 
-        /**
-         * The timestamp the user was created at
-         * @type {number}
-         * @readonly
-         */
-        get createdTimestamp() {
-            const DISCORD_EPOCH = 1420070400000;
+        return convertSnowflakeToDate(this.id)
+    }
 
-            function convertSnowflakeToDate(snowflake) {
-                return new Date(snowflake / 4194304 + DISCORD_EPOCH);
-            }
+    /**
+     * The time the user was created at
+     * @type {Date}
+     * @readonly
+     */
+    get createdAt() {
+        return new Date(this.createdTimestamp);
+    }
 
-            convertSnowflakeToDate(this.id)
-        }
+    /**
+     * The hexadecimal version of the user accent color, with a leading hash
+     * @type {?string}
+     * @readonly
+     */
+    get hexAccentColor() {
+        if (typeof this.accentColor !== 'number') return this.accentColor;
+        return `#${this.accentColor.toString(16).padStart(6, '0')}`;
+    }
 
-        /**
-         * The time the user was created at
-         * @type {Date}
-         * @readonly
-         */
-        get createdAt() {
-            return new Date(this.createdTimestamp);
-        }
+    /**
+     * The Discord "tag" (e.g. `CTK WARRIOR#7923`) for this user
+     * @type {?string}
+     * @readonly
+     */
+    get tag() {
+        return typeof this.username === 'string' ? `${this.username}#${this.discriminator}` : null;
+    }
 
-        /**
-         * The hexadecimal version of the user accent color, with a leading hash
-         * @type {?string}
-         * @readonly
-         */
-        get hexAccentColor() {
-            if (typeof this.accentColor !== 'number') return this.accentColor;
-            return `#${this.accentColor.toString(16).padStart(6, '0')}`;
-        }
+    async fetch(user_id) {
+        const id = user_id ? user_id : this.id;
 
-        /**
-         * The Discord "tag" (e.g. `CTK WARRIOR#7923`) for this user
-         * @type {?string}
-         * @readonly
-         */
-        get tag() {
-            return typeof this.username === 'string' ? `${this.username}#${this.discriminator}` : null;
-        }
-
-        async fetch(user_id) {
-            const id = user_id ? user_id : this.id;
-
-            return await lib.discord.users['@0.2.1'].retrieve({
-                user_id: id,
-            });
-        }
+        return await lib.discord.users['@0.2.1'].retrieve({
+            user_id: id,
+        });
     }
 }

@@ -1,12 +1,7 @@
 const lib = require('lib')({ token: process.env.STDLIB_SECRET_TOKEN });
 
 class channel {
-  constructor(guild, data = {}) {
-    /**
-     * The guild the channel is in
-     * @type {Guild}
-     */
-    this.guild = guild;
+  constructor(data = {}) {
     
     if ('name' in data) {
       /**

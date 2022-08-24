@@ -60,7 +60,7 @@ class channel {
   
   async create(name, { guild_id, type, topic, bitrate, user_limit, rate_limit_per_user, position, permission_overwrites, parent_id, nsfw } = {}) {
     return await lib.discord.guilds['@0.2.4'].channels.create({
-      guild_id: guild_id ? guild_id : this.guild_id,
+      guild_id: guild_id ? guild_id : this.guildId,
       name,
       type,
       topic,

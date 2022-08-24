@@ -23,7 +23,7 @@ class User {
              */
             this.username = data.username;
         } else {
-            this.username ??= null;
+            this.username ?? null;
         }
 
         if ('bot' in data) {
@@ -43,7 +43,7 @@ class User {
              */
             this.discriminator = data.discriminator;
         } else {
-            this.discriminator ??= null;
+            this.discriminator ?? null;
         }
 
         if ('avatar' in data) {
@@ -53,7 +53,7 @@ class User {
              */
             this.avatar = data.avatar;
         } else {
-            this.avatar ??= null;
+            this.avatar ?? null;
         }
 
         if ('banner' in data) {
@@ -64,7 +64,7 @@ class User {
              */
             this.banner = data.banner;
         } else if (this.banner !== null) {
-            this.banner ??= undefined;
+            this.banner ?? undefined;
         }
 
         if ('accent_color' in data) {
@@ -75,7 +75,7 @@ class User {
              */
             this.accentColor = data.accent_color;
         } else if (this.accentColor !== null) {
-            this.accentColor ??= undefined;
+            this.accentColor ?? undefined;
         }
 
         if ('system' in data) {

@@ -13,7 +13,7 @@ Tools.getUserBadges(user.public_flags);
 
 ### **CreateChannel:** ability to use this class similar like Discord.js to create new channels, set parent (category), set position (position of the channel in a category), and send message to a specific channel.
 ```js
-let { CreateChannel } = require('autocode-discordjs');
+let { CreateChannel } = require('@notedwin/autocode-discordjs');
 
 let event = context.params.event;
 
@@ -22,14 +22,16 @@ let event = context.params.event;
 //check out more about bitrates here by reading the * section: https://discord.com/developers/docs/resources/channel#modify-channel-json-params-guild-channel
 //Check out more about channel type here: https://discord.com/developers/docs/resources/channel#channel-object-channel-types
 
-CreateChannel.create('test-channel', 
-{
+let channel = new CreateChannel(event);
+
+let createdChannel = await channel.create('test-channel', {
     type: 0, //for now, you will have to use the integer type from Discord Dev Portal. An alternative way is coming soon.
     topic: `channel topic here`, //optional
-}).then ((channel) => {
-    console.log(channel.name)
-    //don't like the channel name?
-    //you can set a new channel name and new category both at the same time!
-    channel.setName('new-channel-name').setParent('0000000000000')
 })
+
+//replace the data with the created channel's data if you wanna update the created channel's info.
+//use the original context.params.event if you wanna update the current channel's info instead.
+channel = new CreateChannel(createdChannel)
+await channel.setName('new-channel-name')
+await channel.setParent('891309033884094525')
 ```

@@ -2,14 +2,6 @@ const lib = require('lib')({ token: process.env.STDLIB_SECRET_TOKEN });
 
 class channel {
   constructor(data = {}) {
-    
-    if ('name' in data) {
-      /**
-       * The name of the guild channel
-       * @type {string}
-       */
-      this.name = data.name;
-    }
 
     if ('position' in data) {
       /**
@@ -30,14 +22,8 @@ class channel {
        */
       this.parentId = data.parent_id;
     }
-    if ('permission_overwrites' in data) {
-      this.permissionOverwrites.cache.clear();
-      for (const overwrite of data.permission_overwrites) {
-        this.permissionOverwrites._add(overwrite);
-      }
-    }
     
-    this.id = data.channel_id || null;
+    this.id = data.id;
   }
 
   async send(content, { channel_id, embed, tts, components, allowed_mentions, message_reference, attachments } = {}) {

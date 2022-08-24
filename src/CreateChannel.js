@@ -58,9 +58,9 @@ class channel {
     });
   }
   
-  async create(name, { guild_id, type, topic bitrate, user_limit, rate_limit_per_user, position, permission_overwrites, parent_id, nsfw } = {}) {
+  async create(name, { guild_id, type, topic, bitrate, user_limit, rate_limit_per_user, position, permission_overwrites, parent_id, nsfw } = {}) {
     return await lib.discord.guilds['@0.2.4'].channels.create({
-      guild_id,
+      guild_id: guild_id ? guild_id : this.guild_id,
       name,
       type,
       topic,
@@ -76,7 +76,7 @@ class channel {
   
   async setName(name) {
     return await lib.discord.channels['@0.3.2'].update({
-      channel_id: `${thid.id}`,
+      channel_id: `${this.id}`,
       name,
     });
   }

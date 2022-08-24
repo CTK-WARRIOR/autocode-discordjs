@@ -1,4 +1,4 @@
-const lib = require('lib')({token: process.env.STDLIB_SECRET_TOKEN});
+const lib = require('lib')({ token: process.env.STDLIB_SECRET_TOKEN });
 
 const Tools = require('./Tools');
 
@@ -113,11 +113,11 @@ class User {
         get createdTimestamp() {
             const DISCORD_EPOCH = 1420070400000;
 
-          function convertSnowflakeToDate(snowflake) {
-            return new Date(snowflake / 4194304 + DISCORD_EPOCH);
-          }
+            function convertSnowflakeToDate(snowflake) {
+                return new Date(snowflake / 4194304 + DISCORD_EPOCH);
+            }
 
-          convertSnowflakeToDate(this.id)
+            convertSnowflakeToDate(this.id)
         }
 
         /**
@@ -149,11 +149,11 @@ class User {
         }
 
         async fetch(user_id) {
-          const id = user_id ? user_id : this.id;
+            const id = user_id ? user_id : this.id;
 
-          return await lib.discord.users['@0.2.1'].retrieve({
-            user_id: id,
-          });
+            return await lib.discord.users['@0.2.1'].retrieve({
+                user_id: id,
+            });
         }
     }
 }

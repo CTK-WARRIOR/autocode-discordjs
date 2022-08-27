@@ -1,10 +1,10 @@
-# @autocode/discordjs
+# @notedwin/autocode-discordjs
 
 ## Example Usage For Autocode
 
 ### **Tools:** get user's publicly displayed badges like hypesquad badge, discord moderator badge, etc.
 ```js
-let { User, Tools } = require('autocode-discordjs');
+let { User, Tools } = require('@notedwin/autocode-discordjs');
 
 let user = new User();
 

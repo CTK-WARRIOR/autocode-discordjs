@@ -1,4 +1,4 @@
-const lib = require('lib')({token: process.env.STDLIB_SECRET_TOKEN});
+const lib = require('lib')({ token: process.env.STDLIB_SECRET_TOKEN });
 
 const Tools = require('./Tools');
 
@@ -23,7 +23,7 @@ class User {
              */
             this.username = data.username;
         } else {
-            this.username ??= null;
+            this.username ?? null;
         }
 
         if ('bot' in data) {
@@ -43,7 +43,7 @@ class User {
              */
             this.discriminator = data.discriminator;
         } else {
-            this.discriminator ??= null;
+            this.discriminator ?? null;
         }
 
         if ('avatar' in data) {
@@ -53,7 +53,7 @@ class User {
              */
             this.avatar = data.avatar;
         } else {
-            this.avatar ??= null;
+            this.avatar ?? null;
         }
 
         if ('banner' in data) {
@@ -64,7 +64,7 @@ class User {
              */
             this.banner = data.banner;
         } else if (this.banner !== null) {
-            this.banner ??= undefined;
+            this.banner ?? undefined;
         }
 
         if ('accent_color' in data) {
@@ -75,7 +75,7 @@ class User {
              */
             this.accentColor = data.accent_color;
         } else if (this.accentColor !== null) {
-            this.accentColor ??= undefined;
+            this.accentColor ?? undefined;
         }
 
         if ('system' in data) {
@@ -95,65 +95,64 @@ class User {
              */
             this.flags = new Tools.getUserBadges(data.public_flags);
         }
-
-        /**
+    }
+    /**
          * Whether this User is a partial
          * @type {boolean}
          * @readonly
          */
-        get partial() {
-            return typeof this.username !== 'string';
-        }
+     get partial() {
+        return typeof this.username !== 'string';
+    }
 
-        /**
-         * The timestamp the user was created at
-         * @type {number}
-         * @readonly
-         */
-        get createdTimestamp() {
-            const DISCORD_EPOCH = 1420070400000;
+    /**
+     * The timestamp the user was created at
+     * @type {number}
+     * @readonly
+     */
+    get createdTimestamp() {
+        const DISCORD_EPOCH = 1420070400000;
 
-          function convertSnowflakeToDate(snowflake) {
+        function convertSnowflakeToDate(snowflake) {
             return new Date(snowflake / 4194304 + DISCORD_EPOCH);
-          }
-
-          convertSnowflakeToDate(this.id)
         }
 
-        /**
-         * The time the user was created at
-         * @type {Date}
-         * @readonly
-         */
-        get createdAt() {
-            return new Date(this.createdTimestamp);
-        }
+        return convertSnowflakeToDate(this.id)
+    }
 
-        /**
-         * The hexadecimal version of the user accent color, with a leading hash
-         * @type {?string}
-         * @readonly
-         */
-        get hexAccentColor() {
-            if (typeof this.accentColor !== 'number') return this.accentColor;
-            return `#${this.accentColor.toString(16).padStart(6, '0')}`;
-        }
+    /**
+     * The time the user was created at
+     * @type {Date}
+     * @readonly
+     */
+    get createdAt() {
+        return new Date(this.createdTimestamp);
+    }
 
-        /**
-         * The Discord "tag" (e.g. `CTK WARRIOR#7923`) for this user
-         * @type {?string}
-         * @readonly
-         */
-        get tag() {
-            return typeof this.username === 'string' ? `${this.username}#${this.discriminator}` : null;
-        }
+    /**
+     * The hexadecimal version of the user accent color, with a leading hash
+     * @type {?string}
+     * @readonly
+     */
+    get hexAccentColor() {
+        if (typeof this.accentColor !== 'number') return this.accentColor;
+        return `#${this.accentColor.toString(16).padStart(6, '0')}`;
+    }
 
-        async fetch(user_id) {
-          const id = user_id ? user_id : this.id;
+    /**
+     * The Discord "tag" (e.g. `CTK WARRIOR#7923`) for this user
+     * @type {?string}
+     * @readonly
+     */
+    get tag() {
+        return typeof this.username === 'string' ? `${this.username}#${this.discriminator}` : null;
+    }
 
-          return await lib.discord.users['@0.2.1'].retrieve({
+    async fetch(user_id) {
+        const id = user_id ? user_id : this.id;
+
+        return await lib.discord.users['@0.2.1'].retrieve({
             user_id: id,
-          });
-        }
+        });
     }
 }

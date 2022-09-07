@@ -1,20 +1,7 @@
 const lib = require('lib')({ token: process.env.STDLIB_SECRET_TOKEN });
 
 class channel {
-  constructor(guild, data = {}) {
-    /**
-     * The guild the channel is in
-     * @type {Guild}
-     */
-    this.guild = guild;
-    
-    if ('name' in data) {
-      /**
-       * The name of the guild channel
-       * @type {string}
-       */
-      this.name = data.name;
-    }
+  constructor(data = {}) {
 
     if ('position' in data) {
       /**
@@ -35,14 +22,8 @@ class channel {
        */
       this.parentId = data.parent_id;
     }
-    if ('permission_overwrites' in data) {
-      this.permissionOverwrites.cache.clear();
-      for (const overwrite of data.permission_overwrites) {
-        this.permissionOverwrites._add(overwrite);
-      }
-    }
     
-    this.id = data.channel_id || null;
+    this.id = data.id;
   }
 
   async send(content, { channel_id, embed, tts, components, allowed_mentions, message_reference, attachments } = {}) {
@@ -58,9 +39,9 @@ class channel {
     });
   }
   
-  async create(name, { guild_id, type, topic bitrate, user_limit, rate_limit_per_user, position, permission_overwrites, parent_id, nsfw } = {}) {
+  async create(name, { guild_id, type, topic, bitrate, user_limit, rate_limit_per_user, position, permission_overwrites, parent_id, nsfw } = {}) {
     return await lib.discord.guilds['@0.2.4'].channels.create({
-      guild_id,
+      guild_id: guild_id ? guild_id : this.guildId,
       name,
       type,
       topic,
@@ -76,7 +57,7 @@ class channel {
   
   async setName(name) {
     return await lib.discord.channels['@0.3.2'].update({
-      channel_id: `${thid.id}`,
+      channel_id: `${this.id}`,
       name,
     });
   }

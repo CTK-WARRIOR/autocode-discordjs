@@ -17,10 +17,11 @@ let { CreateChannel } = require('@notedwin/autocode-discordjs');
 
 let event = context.params.event;
 
-//CreateChannel.create(name, { guild_id, type, topic, bitrate, user_limit, rate_limit_per_user, position, permission_overwrites, parent_id, nsfw });
-//bitrate and user_limit is only applicable for voice channels and stage channels.
-//check out more about bitrates here by reading the * section: https://discord.com/developers/docs/resources/channel#modify-channel-json-params-guild-channel
-//Check out more about channel type here: https://discord.com/developers/docs/resources/channel#channel-object-channel-types
+/** CreateChannel.create(name, { guild_id, type, topic, bitrate, user_limit, rate_limit_per_user, position, permission_overwrites, parent_id, nsfw });
+ * bitrate and user_limit is only applicable for voice channels and stage channels.
+ * check out more about bitrates here by reading the * section: https://discord.com/developers/docs/resources/channel#modify-channel-json-params-guild-channel
+ * Check out more about channel type here: https://discord.com/developers/docs/resources/channel#channel-object-channel-types
+ */
 
 let channel = new CreateChannel(event);
 
@@ -29,8 +30,9 @@ let createdChannel = await channel.create('test-channel', {
     topic: `channel topic here`, //optional
 })
 
-//replace the data with the created channel's data if you wanna update the created channel's info.
-//use the original context.params.event if you wanna update the current channel's info instead.
+/** replace the data with the created channel's data if you wanna update the created channel's info.
+ *  use the original context.params.event if you wanna update the current channel's info instead.
+ */
 channel = new CreateChannel(createdChannel)
 await channel.setName('new-channel-name')
 await channel.setParent('891309033884094525')
